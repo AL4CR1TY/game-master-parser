@@ -105,4 +105,12 @@ public class DexPokemon {
   public void setBaseFleeRate(double baseFleeRate) {
     this.baseFleeRate = baseFleeRate;
   }
+
+  @Override
+  public String toString() {
+    return this.number + " " + this.name + " " + this.primaryType + " " + this.secondaryType
+        + " HP " + this.baseStamina + " ATK " + this.baseAttack + " DEF " + this.baseDefense
+        + " dex height " + this.pokedexHeight + " dex weight " + this.pokedexWeight
+        + " catch rate " + this.baseCatchRate + " flee rate " + this.baseFleeRate;
+  }
 }
