@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,49 +26,35 @@ public class GameMasterParser {
 
   private static final String DEFAULT_PATHNAME = "game_master_decompiled.txt";
 
-  private File file;
   private BufferedReader reader;
-
-//  public GameMasterParser() {
-//    this.reader = openFile(DEFAULT_PATHNAME);
-//  }
-//
-//  public GameMasterParser(String filePath) {
-//    this.reader = openFile(filePath);
-//  }
+  private ArrayList<String> readLines = new ArrayList<>();
 
   public GameMasterParser(File file) {
     try {
       this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+      read();
     } catch (FileNotFoundException e) {
       LOGGER.error(Message.fileNotFound(file.getPath()));
     }
   }
 
-  /**
-   * Returns a {@link BufferedReader} for a file with the specified path.
-   *
-   * If no file is found, a new one is created, a warning message is logged and the program exited.
-   *
-   * @param path the file path
-   * @return the reader
-   */
-//  private BufferedReader openFile(String path) {
-//    try {
-//      File file = new File(path);
-//      BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-//      LOGGER.info("Read file " + file);
-//      return reader;
-//    } catch (FileNotFoundException e) {
-//      LOGGER.warn("File with path " + path
-//          + " could not be found. Please paste the decompiled game master into the new file.");
-//      try {
-//        new FileOutputStream(new File(path));
-//      } catch (FileNotFoundException e2) {
-//        LOGGER.error("Could not create file.");
-//      }
-//    }
-//    System.exit(1);
-//    return null;
-//  }
+  public void read() {
+    String line = "";
+    int linesRead = 0;
+    int linesSkipped = 0;
+    while (line != null) {
+      try {
+        line = reader.readLine();
+        if(line != null) {
+          this.readLines.add(line);
+          linesRead++;
+        }
+      } catch (IOException e) {
+        LOGGER.error("Error reading line.");
+        linesSkipped++;
+      }
+    }
+    LOGGER.info("Finished reading. Lines read: " + linesRead + ". Lines skipped: " + linesSkipped);
+    LOGGER.debug(this.readLines);
+  }
 }
