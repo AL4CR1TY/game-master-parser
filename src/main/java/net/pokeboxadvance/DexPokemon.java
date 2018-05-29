@@ -18,4 +18,91 @@ public class DexPokemon {
   private double pokedexHeight, pokedexWeight;
   private double baseCatchRate, baseFleeRate;
 
+  public int getNumber() {
+    return number;
+  }
+
+  public void setNumber(int number) {
+    this.number = number;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Type getPrimaryType() {
+    return primaryType;
+  }
+
+  public void setPrimaryType(Type primaryType) {
+    this.primaryType = primaryType;
+  }
+
+  public Type getSecondaryType() {
+    return secondaryType;
+  }
+
+  public void setSecondaryType(Type secondaryType) {
+    this.secondaryType = secondaryType;
+  }
+
+  public int getBaseStamina() {
+    return baseStamina;
+  }
+
+  public void setBaseStamina(int baseStamina) {
+    this.baseStamina = baseStamina;
+  }
+
+  public int getBaseAttack() {
+    return baseAttack;
+  }
+
+  public void setBaseAttack(int baseAttack) {
+    this.baseAttack = baseAttack;
+  }
+
+  public int getBaseDefense() {
+    return baseDefense;
+  }
+
+  public void setBaseDefense(int baseDefense) {
+    this.baseDefense = baseDefense;
+  }
+
+  public double getPokedexHeight() {
+    return pokedexHeight;
+  }
+
+  public void setPokedexHeight(double pokedexHeight) {
+    this.pokedexHeight = pokedexHeight;
+  }
+
+  public double getPokedexWeight() {
+    return pokedexWeight;
+  }
+
+  public void setPokedexWeight(double pokedexWeight) {
+    this.pokedexWeight = pokedexWeight;
+  }
+
+  public double getBaseCatchRate() {
+    return baseCatchRate;
+  }
+
+  public void setBaseCatchRate(double baseCatchRate) {
+    this.baseCatchRate = baseCatchRate;
+  }
+
+  public double getBaseFleeRate() {
+    return baseFleeRate;
+  }
+
+  public void setBaseFleeRate(double baseFleeRate) {
+    this.baseFleeRate = baseFleeRate;
+  }
 }
