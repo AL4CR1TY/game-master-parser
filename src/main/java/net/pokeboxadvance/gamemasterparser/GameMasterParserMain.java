@@ -33,7 +33,7 @@ public class GameMasterParserMain extends Application {
     AnchorPane root = new AnchorPane();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open decompiled GAME_MASTER");
-    fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     fileChooser.getExtensionFilters().add(new ExtensionFilter("txt", "*.txt"));
     Button chooseFileButton = new Button("Choose file");
     chooseFileButton.setOnAction(event -> {
