@@ -38,12 +38,17 @@ public class GameMasterParser {
     }
   }
 
+  /**
+   * Reads the file and stores it in the read lines {@code ArrayList}.
+   */
   public void read() {
     String line = "";
+    int iterations = 0;
     int linesRead = 0;
     int linesSkipped = 0;
     while (line != null) {
       try {
+        iterations++;
         line = reader.readLine();
         if(line != null) {
           this.readLines.add(line);
@@ -55,6 +60,9 @@ public class GameMasterParser {
       }
     }
     LOGGER.info("Finished reading. Lines read: " + linesRead + ". Lines skipped: " + linesSkipped);
+    if(iterations == 1) {
+      LOGGER.info("File appears to be empty.");
+    }
     LOGGER.debug(this.readLines);
   }
 }
