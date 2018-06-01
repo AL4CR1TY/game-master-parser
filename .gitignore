@@ -31,6 +31,7 @@ build/
 # generated files
 *.csv
 *.txt
+dev/
 
 ##### the following was generated with https://www.gitignore.io/ #####
 

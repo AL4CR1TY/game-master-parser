@@ -1,5 +1,8 @@
 package net.pokeboxadvance;
 
+import net.pokeboxadvance.gamemasterparser.DelimitedWritable;
+import net.pokeboxadvance.gamemasterparser.ECMAScriptWritable;
+
 /**
  * Represents a Pokedex entry.
  *
@@ -9,7 +12,7 @@ package net.pokeboxadvance;
  * @version %I%
  * @since 2018-05-28
  */
-public class DexPokemon {
+public class DexPokemon implements DelimitedWritable, ECMAScriptWritable {
 
   private int number;
   private String name;
@@ -112,5 +115,18 @@ public class DexPokemon {
         + " HP " + this.baseStamina + " ATK " + this.baseAttack + " DEF " + this.baseDefense
         + " dex height " + this.pokedexHeight + " dex weight " + this.pokedexWeight
         + " catch rate " + this.baseCatchRate + " flee rate " + this.baseFleeRate;
+  }
+
+  @Override
+  public String toDelimited(char delimiter) {
+    return this.number + delimiter + this.name + delimiter + this.primaryType + delimiter
+        + this.secondaryType + delimiter + this.baseStamina + delimiter + this.baseAttack
+        + delimiter + this.baseDefense + delimiter + this.pokedexHeight + delimiter
+        + this.pokedexWeight + delimiter + this.baseCatchRate + delimiter + this.baseFleeRate;
+  }
+
+  @Override
+  public String toECMAScriptDef() {
+    return "var " + this.name + " = new DexPokemon(" + this.number + ", \"" + this.name + "\")";
   }
 }

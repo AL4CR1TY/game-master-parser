@@ -11,6 +11,9 @@ package net.pokeboxadvance;
  */
 public class Type {
 
+  private int id;
 
-
+  public int getId() {
+    return id;
+  }
 }

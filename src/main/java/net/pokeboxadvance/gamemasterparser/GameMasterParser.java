@@ -2,11 +2,8 @@ package net.pokeboxadvance.gamemasterparser;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import net.pokeboxadvance.Dex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,42 +24,44 @@ public class GameMasterParser {
   private static final String DEFAULT_PATHNAME = "game_master_decompiled.txt";
 
   private BufferedReader reader;
+  private BufferedReader lineCounter;
   private ArrayList<String> readLines = new ArrayList<>();
 
+  private Dex dex = new Dex();
+
+  private boolean doneReading = false, doneParsing = false;
+
+  private ReadingTask readingTask;
+  private CleaningTask cleaningTask;
+  private ParsingTask parsingTask;
+  private WritingTask csvWritingTask;
+
   public GameMasterParser(File file) {
-    try {
-      this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-      read();
-    } catch (FileNotFoundException e) {
-      LOGGER.error(Message.fileNotFound(file.getPath()));
-    }
+    this.readingTask = new ReadingTask(file, this.readLines);
+    this.cleaningTask = new CleaningTask(this.readLines);
+    this.parsingTask = new ParsingTask(this.readLines, dex);
+//    this.readingTask.setOnSucceeded(event -> {
+//      this.readLines = this.parsingTask.getReadLines();
+//      this.parsingTask.run();
+//    });
+    this.readingTask.setOnFailed(event -> this.readingTask.getException().printStackTrace());
+    this.cleaningTask.setOnFailed(event -> this.cleaningTask.getException().printStackTrace());
+    this.parsingTask.setOnFailed(event -> this.parsingTask.getException().printStackTrace());
   }
 
-  /**
-   * Reads the file and stores it in the read lines {@code ArrayList}.
-   */
-  public void read() {
-    String line = "";
-    int iterations = 0;
-    int linesRead = 0;
-    int linesSkipped = 0;
-    while (line != null) {
-      try {
-        iterations++;
-        line = reader.readLine();
-        if(line != null) {
-          this.readLines.add(line);
-          linesRead++;
-        }
-      } catch (IOException e) {
-        LOGGER.error("Error reading line.");
-        linesSkipped++;
-      }
-    }
-    LOGGER.info("Finished reading. Lines read: " + linesRead + ". Lines skipped: " + linesSkipped);
-    if(iterations == 1) {
-      LOGGER.info("File appears to be empty.");
-    }
-    LOGGER.debug(this.readLines);
+  public ReadingTask getReadingTask() {
+    return this.readingTask;
+  }
+
+  public CleaningTask getCleaningTask() {
+    return this.cleaningTask;
+  }
+
+  public ParsingTask getParsingTask() {
+    return this.parsingTask;
+  }
+
+  public Dex getDex() {
+    return dex;
   }
 }
