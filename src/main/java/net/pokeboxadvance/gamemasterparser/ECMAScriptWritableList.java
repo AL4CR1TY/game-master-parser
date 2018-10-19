@@ -12,6 +12,6 @@ import java.util.ArrayList;
  */
 public interface ECMAScriptWritableList {
 
-  ArrayList<ECMAScriptWritable> ecmaScriptWritableList();
   int size();
+  ArrayList<ECMAScriptWritable> ecmaScriptWritableList();
 }

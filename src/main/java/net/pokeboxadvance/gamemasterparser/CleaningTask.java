@@ -29,8 +29,8 @@ public class CleaningTask extends Task<Void> {
     updateProgress(0, 1);
     int work = 0, listSize = lines.size();
     LOGGER.info("Cleaning lines");
-    for(String line : this.lines) {
-      line = line.replaceAll("\\s+", "");
+    for(int i=0; i<this.lines.size(); i++) {
+      this.lines.set(i, this.lines.get(i).replaceAll("[\\s+ \"]", ""));
       updateProgress(++work, listSize);
     }
     updateProgress(1, 1);

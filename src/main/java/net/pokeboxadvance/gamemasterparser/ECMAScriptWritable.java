@@ -1,5 +1,7 @@
 package net.pokeboxadvance.gamemasterparser;
 
+import java.lang.reflect.Field;
+
 /**
  * Interface to ensure {@code toECMAScriptDef()} method.
  *
@@ -9,5 +11,11 @@ package net.pokeboxadvance.gamemasterparser;
  */
 public interface ECMAScriptWritable {
 
-  String toECMAScriptDef();
+//  public String objectifyField(Field field) throws Exception;
+
+  public String toECMAScriptDef();
+
+  public abstract String toECMAScriptCollectionDef();
+
+  public abstract String toJSON();
 }

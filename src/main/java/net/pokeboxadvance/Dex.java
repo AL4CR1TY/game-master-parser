@@ -16,6 +16,7 @@ public class Dex {
 
   private static final Logger LOGGER = LogManager.getLogger();
 
+  private Typedex typedex = new Typedex();
   private Pokedex pokedex = new Pokedex();
   private Movedex movedex = new Movedex();
 
@@ -43,5 +44,9 @@ public class Dex {
 
   public Movedex getMovedex() {
     return this.movedex;
+  }
+
+  public Typedex getTypedex() {
+    return this.typedex;
   }
 }

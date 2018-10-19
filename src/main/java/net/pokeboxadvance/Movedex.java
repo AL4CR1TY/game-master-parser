@@ -53,4 +53,9 @@ public class Movedex implements Iterable<Move>, DelimitedWritableList, ECMAScrip
   public int size() {
     return this.movedex.size();
   }
+
+  @Override
+  public String toString() {
+    return this.movedex.toString();
+  }
 }

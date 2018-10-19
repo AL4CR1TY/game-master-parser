@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import net.pokeboxadvance.gamemasterparser.DelimitedWritable;
 import net.pokeboxadvance.gamemasterparser.DelimitedWritableList;
+import net.pokeboxadvance.gamemasterparser.ECMAScriptCollectionWritable;
 import net.pokeboxadvance.gamemasterparser.ECMAScriptWritable;
 import net.pokeboxadvance.gamemasterparser.ECMAScriptWritableList;
 import org.apache.logging.log4j.LogManager;

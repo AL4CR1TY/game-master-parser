@@ -73,7 +73,10 @@ public class GameMasterParserApplication extends Application {
             new WriteArguments(pokemonCheckBox.isSelected(), moveCheckBox.isSelected(),
                 saveDestinationFolder.getName().equals("dev")));
         writingTask.setOnSucceeded(writingSuccessEvent -> updateSavingLabel("Saving \u2714"));
-        writingTask.setOnFailed(parsingFailureEvent -> updateSavingLabel("Saving \u2716"));
+        writingTask.setOnFailed(parsingFailureEvent -> {
+          updateSavingLabel("Saving \u2716");
+          writingTask.getException().printStackTrace();
+        });
         saveProgressBar = new LabeledProgressBar();
         saveProgressBar.setStatus("Saving");
         saveProgressBar.progressProperty().bind(writingTask.progressProperty());
@@ -149,8 +152,10 @@ public class GameMasterParserApplication extends Application {
           GameMasterParserApplication.updateParsingLabel("Parsing \u2714");
           root.getChildren().addAll(saveButton, pokemonCheckBox, moveCheckBox);
         });
-        gameMasterParser.getParsingTask().setOnFailed(readingFailureEvent
-            -> GameMasterParserApplication.updateParsingLabel("Parsing \u2716"));
+        gameMasterParser.getParsingTask().setOnFailed(parsingFailureEvent -> {
+          GameMasterParserApplication.updateParsingLabel("Parsing \u2716");
+          gameMasterParser.getParsingTask().getException().printStackTrace();
+        });
         //run reading task
         readingThread.start();
       } else {
