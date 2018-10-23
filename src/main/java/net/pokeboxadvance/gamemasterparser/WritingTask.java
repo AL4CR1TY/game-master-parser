@@ -49,7 +49,7 @@ public class WritingTask extends Task<Void> {
           new File(this.destinationFolder.getAbsolutePath() + '/' + "pokemon.js"))));
 
       writeECMAScript(writer, this.dex.getPokedex(), false);
-      writer.write("var POKEMON = {");
+      writer.write("const POKEMON = {");
       int count = 1;
       for (DexPokemon pokemon : this.dex.getPokedex()) {
         writer.write("\"" + pokemon.getName().toUpperCase() + "\": "

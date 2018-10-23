@@ -63,7 +63,7 @@ public class Format {
 
   public static String toECMAScriptObject(Map<String, Object> fieldMap) {
     StringBuilder def = new StringBuilder(
-        "var " + Format.toVariableName(fieldMap.get("name")) + " = {");
+        "const " + Format.toVariableName(fieldMap.get("name")) + " = {");
     int count = 0;
     for (Entry<String, Object> entry : fieldMap.entrySet()) {
       try {
